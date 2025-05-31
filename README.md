@@ -5,7 +5,7 @@ Create a basic voice recognition system in C# that listens and shows what you sa
 
 ### 📋 Project Roadmap
 
-- [ ] **Setting up your environment**
+- [x] **Setting up your environment**
 
 - [ ] **Learning basic C# concepts**
 
