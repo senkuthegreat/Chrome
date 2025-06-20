@@ -2,7 +2,7 @@ import time
 import threading
 from core.neural_network import SimpleNeuralNetwork
 from memory.memory_system import MemorySystem
-from nlp.text_processor import TextProcessor
+from nlp.neural_ai import NeuralAI
 from streaming.youtube_streamer import YouTubeStreamer
 from control.ai_actions import AIActions
 
@@ -10,7 +10,7 @@ class MainAI:
     def __init__(self):
         self.neural_network = SimpleNeuralNetwork(input_size=100, hidden_size=50, output_size=10)
         self.memory = MemorySystem()
-        self.text_processor = TextProcessor()
+        self.neural_ai = NeuralAI()
         self.streamer = YouTubeStreamer()
         self.pc_control = AIActions()
         
@@ -36,12 +36,11 @@ class MainAI:
             pc_result = self.pc_control.interpret_command(user_input)
             response = f"PC Action: {pc_result}"
         else:
-            # Process the text and generate response
-            response = self.text_processor.generate_response(user_input)
+            # Process the text and generate neural response
+            response = self.neural_ai.generate_response(user_input)
         
-        # Learn from the interaction
-        if self.learning_mode:
-            self.text_processor.learn_pattern(user_input, response)
+        # Learn from the interaction (simple AI learns automatically)
+        pass
         
         # Store the response
         response_experience = {
@@ -54,7 +53,7 @@ class MainAI:
         
         return response
     
-    def start_streaming(self, stream_key: str = None):
+    def start_streaming(self, stream_key: str = ""):
         """Start YouTube streaming with AI commentary"""
         if stream_key:
             self.streamer.stream_key = stream_key
@@ -101,7 +100,14 @@ class MainAI:
     
     def learn_from_feedback(self, input_text: str, correct_response: str):
         """Learn from user corrections"""
-        self.text_processor.learn_pattern(input_text, correct_response)
+        # Smart processor learns automatically, but we can store feedback
+        feedback_experience = {
+            'type': 'feedback',
+            'input': input_text,
+            'correct_response': correct_response,
+            'context': 'user_correction'
+        }
+        self.memory.add_experience(feedback_experience)
         
         learning_experience = {
             'type': 'learning',
@@ -114,7 +120,8 @@ class MainAI:
     def save_state(self):
         """Save the AI's current state"""
         self.memory.save_memory('ai_memory.json')
-        print("AI state saved successfully!")
+        self.neural_ai.save_model()
+        print("AI state and knowledge saved successfully!")
     
     def start_autonomous_mode(self):
         """Start autonomous PC control"""
@@ -151,7 +158,7 @@ class MainAI:
                 'long_term_count': len(self.memory.long_term_memory),
                 'knowledge_base_size': len(self.memory.knowledge_base)
             },
-            'vocabulary_size': len(self.text_processor.vocabulary),
+            'neural_stats': self.neural_ai.get_stats(),
             'streaming_stats': self.streamer.get_stream_stats(),
             'pc_control_history': self.pc_control.get_action_history(),
             'autonomous_mode': self.autonomous_mode
