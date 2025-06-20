@@ -17,36 +17,50 @@ class PCController:
         self.gui_available = GUI_AVAILABLE
         
     def move_mouse(self, x: int, y: int):
-        pyautogui.moveTo(x, y)
-        return f"Mouse moved to ({x}, {y})"
+        if self.gui_available:
+            pyautogui.moveTo(x, y)
+            return f"Mouse moved to ({x}, {y})"
+        return f"[SIMULATED] Mouse moved to ({x}, {y})"
     
     def click(self, x: int = None, y: int = None):
-        if x and y:
-            pyautogui.click(x, y)
-            return f"Clicked at ({x}, {y})"
-        pyautogui.click()
-        return "Clicked at current position"
+        if self.gui_available:
+            if x and y:
+                pyautogui.click(x, y)
+                return f"Clicked at ({x}, {y})"
+            pyautogui.click()
+            return "Clicked at current position"
+        return f"[SIMULATED] Clicked at ({x}, {y})" if x and y else "[SIMULATED] Clicked"
     
     def type_text(self, text: str):
-        pyautogui.write(text)
-        return f"Typed: {text}"
+        if self.gui_available:
+            pyautogui.write(text)
+            return f"Typed: {text}"
+        return f"[SIMULATED] Typed: {text}"
     
     def press_key(self, key: str):
-        pyautogui.press(key)
-        return f"Pressed: {key}"
+        if self.gui_available:
+            pyautogui.press(key)
+            return f"Pressed: {key}"
+        return f"[SIMULATED] Pressed: {key}"
     
     def key_combo(self, keys: List[str]):
-        pyautogui.hotkey(*keys)
-        return f"Pressed: {'+'.join(keys)}"
+        if self.gui_available:
+            pyautogui.hotkey(*keys)
+            return f"Pressed: {'+'.join(keys)}"
+        return f"[SIMULATED] Pressed: {'+'.join(keys)}"
     
     def scroll(self, clicks: int):
-        pyautogui.scroll(clicks)
-        return f"Scrolled {clicks}"
+        if self.gui_available:
+            pyautogui.scroll(clicks)
+            return f"Scrolled {clicks}"
+        return f"[SIMULATED] Scrolled {clicks}"
     
     def screenshot(self):
-        filename = f"screen_{int(time.time())}.png"
-        pyautogui.screenshot(filename)
-        return filename
+        if self.gui_available:
+            filename = f"screen_{int(time.time())}.png"
+            pyautogui.screenshot(filename)
+            return filename
+        return "[SIMULATED] Screenshot taken"
     
     def open_app(self, app: str):
         try:
@@ -56,11 +70,14 @@ class PCController:
                 subprocess.Popen([app])
             return f"Opened {app}"
         except Exception as e:
-            return f"Failed: {e}"
+            return f"[SIMULATED] Opened {app} (GUI not available)"
     
     def open_url(self, url: str):
-        webbrowser.open(url)
-        return f"Opened: {url}"
+        try:
+            webbrowser.open(url)
+            return f"Opened: {url}"
+        except Exception:
+            return f"[SIMULATED] Opened: {url}"
     
     def run_command(self, cmd: str):
         try:
