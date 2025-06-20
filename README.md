@@ -1,5 +1,7 @@
 # 🤖 Mecha-Senku(Meku/M-Senku): Your Local AI Assistant
 
+![Gemini_Generated_Image_f9lv99f9lv99f9lv](https://github.com/user-attachments/assets/b9c1d1d0-7b64-446a-99df-247bf8e339a2)
+
 **Mecha-Senku** is a personal AI assistant that runs entirely offline on your PC using [Ollama](https://ollama.com/) and large language models like `gemma:2b` or `llama2:7b-chat`. Inspired by Ultron from Avengers and Senku from Dr. Stone, this assistant can:
 
 - 💬 Chat intelligently with real-time text and voice
@@ -125,4 +127,3 @@ Inspired by:
  - [ ] Offline fallback (System.Speech if Azure key not available)
 
  - [ ] Custom voice clone (for future)
-
