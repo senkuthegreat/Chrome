@@ -1,14 +1,20 @@
-import pyautogui
 import subprocess
 import os
 import time
 import webbrowser
 from typing import Tuple, List, Optional
 
+try:
+    import pyautogui
+    pyautogui.FAILSAFE = True
+    pyautogui.PAUSE = 0.1
+    GUI_AVAILABLE = True
+except Exception:
+    GUI_AVAILABLE = False
+
 class PCController:
     def __init__(self):
-        pyautogui.FAILSAFE = True
-        pyautogui.PAUSE = 0.1
+        self.gui_available = GUI_AVAILABLE
         
     def move_mouse(self, x: int, y: int):
         pyautogui.moveTo(x, y)
