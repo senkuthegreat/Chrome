@@ -1,5 +1,7 @@
 # 🤖 Mecha-Senku(Meku/M-Senku): Your Local AI Assistant
 
+![Gemini_Generated_Image_f9lv99f9lv99f9lv](https://github.com/user-attachments/assets/b9c1d1d0-7b64-446a-99df-247bf8e339a2)
+
 **Mecha-Senku** is a personal AI assistant that runs entirely offline on your PC using [Ollama](https://ollama.com/) and large language models like `gemma:2b` or `llama2:7b-chat`. Inspired by Ultron from Avengers and Senku from Dr. Stone, this assistant can:
 
 - 💬 Chat intelligently with real-time text and voice
@@ -76,3 +78,52 @@ Inspired by:
 
 -🧠 Open-source devs of Ollama, Edge-TTS, and beyond
 
+## ✅ Done So Far
+
+ - [x] Local AI working with Ollama (llama2:7b-chat)
+
+ - [x] Text-to-Speech using Edge TTS (neural voice)
+
+ - [x] Wake word “Hey Senku” triggers listening
+
+ - [x] Switched to Vosk, tested basic speech input
+
+ - [x]  Created README.md with project structure
+
+ - [x] Pushed to GitHub and renamed repo
+
+## 🔧 To Do Tomorrow
+
+ - [ ] 🎤 Voice Input (Accurate STT)
+  
+ - [ ] Fix Azure login issue (use incognito or new work account)
+
+ - [ ] Create Azure Speech resource (get Key and Region)
+
+ - [ ] Install Speech SDK: dotnet add package Microsoft.CognitiveServices.Speech
+
+ - [ ] Replace Vosk with Microsoft Azure Speech-to-Text
+
+ - [ ] Test full loop: Wake word → Speech → LLM → Voice reply
+
+## 🧠 Brain Logic / Features
+
+ - [ ] Implement command parsing (e.g. "Open YouTube", "Search X on Google")
+
+ - [ ] Add simple PC control features (launch apps, type, close windows)
+
+ - [ ] Log AI conversation history
+
+## 🎥 Streamer Mode
+ - [ ] Add “Live Commentary” mode (text to speech loop with camera overlay)
+
+ - [ ] Integrate with OBS (optional for future)
+
+ - [ ] Build a “Now Playing” + “Currently Talking” UI bar
+
+## 💡 Extra Enhancements (Optional)
+ - [ ] Personality module (Senku-style responses)
+
+ - [ ] Offline fallback (System.Speech if Azure key not available)
+
+ - [ ] Custom voice clone (for future)
